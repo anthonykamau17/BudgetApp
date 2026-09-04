@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.anthonykamau.budgetapp.ui.dashboard.DashboardFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.anthonykamau.budgetapp.ui.history.HistoryFragment"
+        android:label="History" />
+
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.anthonykamau.budgetapp.ui.goals.GoalsFragment"
+        android:label="Goals" />
+
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="com.anthonykamau.budgetapp.ui.analytics.AnalyticsFragment"
+        android:label="Stats" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.anthonykamau.budgetapp.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.anthonykamau.budgetapp.ui.addexpense.AddExpenseFragment"
+        android:label="Add Expense" />
+
+</navigation>
