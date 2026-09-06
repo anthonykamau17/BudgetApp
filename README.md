@@ -52,3 +52,29 @@ Track expenses, set savings goals, and get brutally honest (and funny) financial
 ---
 
 ## 🏗️ Project Structure
+com.anthonykamau.budgetapp/
+├── data/
+│ ├── dao/ # Room DAOs
+│ ├── db/ # AppDatabase
+│ ├── entity/ # Room entities
+│ └── repository/ # Repository layer
+├── ui/
+│ ├── dashboard/ # Home screen
+│ ├── addexpense/ # Add expense screen
+│ ├── history/ # Transaction history
+│ ├── analytics/ # Charts & insights
+│ ├── goals/ # Savings goals
+│ └── settings/ # App configuration
+└── util/ # Helper classes
+
+## 👨‍💻 Author
+
+**Anthony Kamau**
+BBIT Third year student — Strathmore University
+Mobile Application Development Project
+
+---
+
+## 📄 License
+
+This project is open source and available under the MIT License.
