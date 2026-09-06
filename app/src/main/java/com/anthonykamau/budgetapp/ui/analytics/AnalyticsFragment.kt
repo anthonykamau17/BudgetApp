@@ -35,10 +35,13 @@ class AnalyticsFragment : Fragment() {
         val tabSemester = view.findViewById<TextView>(R.id.tab_semester)
 
         // tab click listeners
-        tabWeek.setOnClickListener {
-            currentTab = "week"
-            updateTabStyles(view, "week")
-            viewModel.weekExpenses.value?.let { updateStats(view, it) }
+
+        // force initial load for week tab
+        viewModel.weekExpenses.observe(viewLifecycleOwner) { expenses ->
+            if (currentTab == "week") {
+                updateStats(view, expenses)
+                updateTabStyles(view, "week")
+            }
         }
 
         tabMonth.setOnClickListener {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/bg_base">
+
+    <!-- Big emoji/icon -->
+    <TextView
+        android:id="@+id/tv_slide_emoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💰"
+        android:textSize="80sp"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_slide_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="@color/text_primary"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:letterSpacing="-0.02"/>
+
+    <!-- Description -->
+    <TextView
+        android:id="@+id/tv_slide_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description here"
+        android:textColor="@color/text_secondary"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"/>
+
+    <!-- Highlight tag -->
+    <TextView
+        android:id="@+id/tv_slide_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/bg_base"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:background="@color/orange_bright"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+
+</LinearLayout>

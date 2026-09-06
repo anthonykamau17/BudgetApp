@@ -14,7 +14,6 @@ import com.anthonykamau.budgetapp.util.DateUtils
 class RecentExpenseAdapter : ListAdapter<Expense, RecentExpenseAdapter.ExpenseViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
-        // create a simple row view programmatically
         val view = LayoutInflater.from(parent.context)
             .inflate(android.R.layout.simple_list_item_2, parent, false)
         return ExpenseViewHolder(view)
@@ -31,8 +30,21 @@ class RecentExpenseAdapter : ListAdapter<Expense, RecentExpenseAdapter.ExpenseVi
         fun bind(expense: Expense) {
             text1.text = "${expense.categoryEmoji} ${expense.categoryName}"
             text1.setTextColor(0xFFFFFFFF.toInt())
+
+            val bgColor = when (expense.categoryName.lowercase()) {
+                "food" -> 0xFF2A1400.toInt()
+                "transport" -> 0xFF001A2A.toInt()
+                "books" -> 0xFF0A1A00.toInt()
+                "coffee" -> 0xFF1A0A00.toInt()
+                "rent" -> 0xFF1A001A.toInt()
+                "health" -> 0xFF001A00.toInt()
+                "fun" -> 0xFF0A001A.toInt()
+                else -> 0xFF14141C.toInt()
+            }
+            text1.setBackgroundColor(bgColor)
+
             text2.text = "- ${CurrencyUtils.formatAmount(expense.amount)}  •  ${DateUtils.formatDateShort(expense.date)}"
-            text2.setTextColor(0xFFF87171.toInt()) // red_soft
+            text2.setTextColor(0xFFF87171.toInt())
         }
     }
 

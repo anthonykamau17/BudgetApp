@@ -86,18 +86,20 @@ class SettingsFragment : Fragment() {
         }
 
         // reset month button
+        // reset month button
         btnReset.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Reset this month?")
                 .setMessage("This will delete all expenses from this month. Are you sure?")
                 .setPositiveButton("Reset") { _, _ ->
-                    Toast.makeText(requireContext(), "Month reset", Toast.LENGTH_SHORT).show()
+                    viewModel.resetMonthExpenses()
+                    Toast.makeText(requireContext(), "This month's expenses cleared ✅", Toast.LENGTH_SHORT).show()
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
         }
 
-        // clear all data button
+// clear all data button
         btnClear.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Clear all data?")
@@ -107,7 +109,8 @@ class SettingsFragment : Fragment() {
                         .setTitle("Are you absolutely sure?")
                         .setMessage("Everything will be gone. For real.")
                         .setPositiveButton("Yes, delete") { _, _ ->
-                            Toast.makeText(requireContext(), "All data cleared", Toast.LENGTH_SHORT).show()
+                            viewModel.clearAllData()
+                            Toast.makeText(requireContext(), "All data cleared 🗑️", Toast.LENGTH_SHORT).show()
                         }
                         .setNegativeButton("Cancel", null)
                         .show()
@@ -115,5 +118,6 @@ class SettingsFragment : Fragment() {
                 .setNegativeButton("Cancel", null)
                 .show()
         }
+
     }
 }

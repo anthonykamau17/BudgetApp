@@ -39,6 +39,14 @@ interface ExpenseDao {
     // get last 5 expenses — used in Dashboard recent list
     @Query("SELECT * FROM expenses ORDER BY createdAt DESC LIMIT 5")
     fun getRecentExpenses(): LiveData<List<Expense>>
+
+    // delete all expenses from this month
+    @Query("DELETE FROM expenses WHERE date >= :startOfMonth")
+    suspend fun deleteExpensesFromDate(startOfMonth: Long)
+
+    // delete ALL expenses
+    @Query("DELETE FROM expenses")
+    suspend fun deleteAllExpenses()
 }
 
 // helper data class for category totals query — not a Room entity

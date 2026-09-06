@@ -46,27 +46,27 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             value = BudgetCalculator.calculateRemaining(budget, spent)
         }
         addSource(settings) { s ->
+            val budget = s?.monthlyBudget ?: 0.0
             val spent = totalSpent.value ?: 0.0
-            value = BudgetCalculator.calculateRemaining(s.monthlyBudget, spent)
+            value = BudgetCalculator.calculateRemaining(budget, spent)
         }
     }
 
-    // percentage of budget used (0–100)
     val percentageUsed = MediatorLiveData<Double>().apply {
         addSource(totalSpent) { spent ->
             val budget = settings.value?.monthlyBudget ?: 0.0
             value = BudgetCalculator.calculatePercentageUsed(budget, spent)
         }
         addSource(settings) { s ->
+            val budget = s?.monthlyBudget ?: 0.0
             val spent = totalSpent.value ?: 0.0
-            value = BudgetCalculator.calculatePercentageUsed(s.monthlyBudget, spent)
+            value = BudgetCalculator.calculatePercentageUsed(budget, spent)
         }
     }
 
-    // daily budget left
     val dailyBudgetLeft = MediatorLiveData<Double>().apply {
         addSource(remaining) { rem ->
-            value = BudgetCalculator.calculateDailyBudgetLeft(rem, daysLeftInMonth)
+            value = BudgetCalculator.calculateDailyBudgetLeft(rem ?: 0.0, daysLeftInMonth)
         }
     }
 

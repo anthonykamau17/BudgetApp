@@ -8,6 +8,7 @@ import com.anthonykamau.budgetapp.data.db.AppDatabase
 import com.anthonykamau.budgetapp.data.entity.BudgetSettings
 import com.anthonykamau.budgetapp.data.repository.SavingsGoalRepository
 import kotlinx.coroutines.launch
+import com.anthonykamau.budgetapp.data.repository.ExpenseRepository
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -46,7 +47,22 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun resetMonthExpenses() {
         viewModelScope.launch {
-            database.expenseDao().getAllExpenses()
+            val repository = ExpenseRepository(
+                database.expenseDao(),
+                database.categoryDao()
+            )
+            val startOfMonth = com.anthonykamau.budgetapp.util.DateUtils.getStartOfCurrentMonth()
+            repository.deleteExpensesFromDate(startOfMonth)
+        }
+    }
+
+    fun clearAllData() {
+        viewModelScope.launch {
+            val repository = ExpenseRepository(
+                database.expenseDao(),
+                database.categoryDao()
+            )
+            repository.deleteAllExpenses()
         }
     }
 }

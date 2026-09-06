@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="12dp"
     android:gravity="center_vertical"
-    android:background="@color/bg_base">
+    android:background="@drawable/item_expense_bg">
 
     <!-- Category icon circle -->
     <androidx.cardview.widget.CardView

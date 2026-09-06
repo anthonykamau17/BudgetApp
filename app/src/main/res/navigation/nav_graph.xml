@@ -7,31 +7,62 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.anthonykamau.budgetapp.ui.dashboard.DashboardFragment"
-        android:label="Home" />
+        android:label="Home"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.anthonykamau.budgetapp.ui.history.HistoryFragment"
-        android:label="History" />
+        android:label="History"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
         android:id="@+id/goalsFragment"
         android:name="com.anthonykamau.budgetapp.ui.goals.GoalsFragment"
-        android:label="Goals" />
+        android:label="Goals"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
         android:id="@+id/analyticsFragment"
         android:name="com.anthonykamau.budgetapp.ui.analytics.AnalyticsFragment"
-        android:label="Stats" />
+        android:label="Stats"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.anthonykamau.budgetapp.ui.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="Settings"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
         android:id="@+id/addExpenseFragment"
         android:name="com.anthonykamau.budgetapp.ui.addexpense.AddExpenseFragment"
-        android:label="Add Expense" />
+        android:label="Add Expense"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right">
+
+        <argument
+            android:name="categoryName"
+            app:argType="string"
+            android:defaultValue="" />
+
+    </fragment>
 
 </navigation>

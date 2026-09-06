@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.work.runtime)
 
     // Room
     implementation(libs.androidx.room.runtime)

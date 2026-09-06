@@ -72,6 +72,22 @@ class AddExpenseFragment : Fragment() {
         // build category grid
         buildCategoryGrid(view)
 
+        // pre-select category if passed from Quick Add
+        val preSelectedCategory = arguments?.getString("categoryName") ?: ""
+        if (preSelectedCategory.isNotEmpty()) {
+            val match = categories.find { it.second == preSelectedCategory }
+            match?.let { (id, name, emoji) ->
+                viewModel.selectCategory(id, name, emoji)
+                // highlight the matching button in the grid
+                val grid = view.findViewById<GridLayout>(R.id.grid_categories)
+                val index = categories.indexOf(match)
+                if (index >= 0 && index < grid.childCount) {
+                    (grid.getChildAt(index) as? androidx.cardview.widget.CardView)
+                        ?.setCardBackgroundColor(resources.getColor(R.color.bg_deep, null))
+                }
+            }
+        }
+
         // build keypad
         buildKeypad(view)
 

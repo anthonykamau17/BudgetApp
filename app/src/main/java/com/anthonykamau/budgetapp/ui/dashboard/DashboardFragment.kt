@@ -52,6 +52,7 @@ class DashboardFragment : Fragment() {
                 val tvBudgetTotal = view.findViewById<TextView>(R.id.tv_budget_total)
                 tvBudgetTotal.text = "Budget: ${CurrencyUtils.formatAmount(settings.monthlyBudget, settings.currency)}"
             }
+
         }
 
         // observe remaining balance
@@ -106,21 +107,38 @@ class DashboardFragment : Fragment() {
 
         // quick add buttons — all navigate to Add Expense
         view.findViewById<LinearLayout>(R.id.btn_quick_food).setOnClickListener {
-            findNavController().navigate(R.id.addExpenseFragment)
+            val bundle = android.os.Bundle().apply { putString("categoryName", "Food") }
+            findNavController().navigate(R.id.addExpenseFragment, bundle)
         }
         view.findViewById<LinearLayout>(R.id.btn_quick_fare).setOnClickListener {
-            findNavController().navigate(R.id.addExpenseFragment)
+            val bundle = android.os.Bundle().apply { putString("categoryName", "Transport") }
+            findNavController().navigate(R.id.addExpenseFragment, bundle)
         }
         view.findViewById<LinearLayout>(R.id.btn_quick_books).setOnClickListener {
-            findNavController().navigate(R.id.addExpenseFragment)
+            val bundle = android.os.Bundle().apply { putString("categoryName", "Books") }
+            findNavController().navigate(R.id.addExpenseFragment, bundle)
         }
         view.findViewById<LinearLayout>(R.id.btn_quick_coffee).setOnClickListener {
-            findNavController().navigate(R.id.addExpenseFragment)
+            val bundle = android.os.Bundle().apply { putString("categoryName", "Coffee") }
+            findNavController().navigate(R.id.addExpenseFragment, bundle)
         }
 
         // see all → navigate to history
         view.findViewById<TextView>(R.id.tv_see_all).setOnClickListener {
             findNavController().navigate(R.id.historyFragment)
+        }
+        // circular progress
+        val circularProgress = view.findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.circular_progress)
+        val tvSpendAmount = view.findViewById<TextView>(R.id.tv_spend_amount)
+        val tvSpendSub = view.findViewById<TextView>(R.id.tv_spend_sub)
+
+        viewModel.totalSpent.observe(viewLifecycleOwner) { spent ->
+            val currency = viewModel.settings.value?.currency ?: "KES"
+            val budget = viewModel.settings.value?.monthlyBudget ?: 0.0
+            val pct = if (budget > 0) ((spent / budget) * 100).toInt().coerceIn(0, 100) else 0
+            circularProgress.progress = pct
+            tvSpendAmount.text = CurrencyUtils.formatAmount(spent, currency)
+            tvSpendSub.text = "of ${CurrencyUtils.formatAmount(budget, currency)} budget"
         }
     }
 
@@ -132,5 +150,16 @@ class DashboardFragment : Fragment() {
             hour < 17 -> "Good afternoon,"
             else      -> "Good evening,"
         }
+    }
+    private fun showBudgetSetupPrompt() {
+        android.app.AlertDialog.Builder(requireContext())
+            .setTitle("Welcome to BudgetApp! 👋")
+            .setMessage("Let's set up your monthly budget so we can start tracking your money.")
+            .setPositiveButton("Set up now") { _, _ ->
+                findNavController().navigate(R.id.settingsFragment)
+            }
+            .setNegativeButton("Later", null)
+            .setCancelable(false)
+            .show()
     }
 }

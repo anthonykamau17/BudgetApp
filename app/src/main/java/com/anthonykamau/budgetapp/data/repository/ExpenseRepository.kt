@@ -59,4 +59,11 @@ class ExpenseRepository(
     suspend fun getCategoryCount(): Int {
         return categoryDao.getCategoryCount()
     }
+    suspend fun deleteExpensesFromDate(startOfMonth: Long) {
+        expenseDao.deleteExpensesFromDate(startOfMonth)
+    }
+
+    suspend fun deleteAllExpenses() {
+        expenseDao.deleteAllExpenses()
+    }
 }

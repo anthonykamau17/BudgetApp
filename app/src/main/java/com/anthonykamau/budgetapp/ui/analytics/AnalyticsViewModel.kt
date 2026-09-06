@@ -36,14 +36,15 @@ class AnalyticsViewModel(application: Application) : AndroidViewModel(applicatio
 
     private fun getStartOfWeek(): Long {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        val daysFromMonday = (dayOfWeek - Calendar.MONDAY + 7) % 7
+        calendar.add(Calendar.DAY_OF_YEAR, -daysFromMonday)
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
-
     private fun getStartOfSemester(): Long {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.MONTH, Calendar.AUGUST)
