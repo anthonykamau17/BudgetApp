@@ -28,7 +28,7 @@ class AddExpenseFragment : Fragment() {
         Triple(5, "Rent", "🏠"),
         Triple(6, "Health", "💊"),
         Triple(7, "Fun", "🎮"),
-        Triple(8, "Other", "➕")
+        Triple(8, "Other", "✏️")  // changed emoji to pencil
     )
 
     // keypad keys
@@ -46,9 +46,12 @@ class AddExpenseFragment : Fragment() {
     ): View {
         return inflater.inflate(R.layout.fragment_add_expense, container, false)
     }
+    // make tvCategory accessible in buildCategoryGrid
+    private var tvSelectedCategory: TextView? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        tvSelectedCategory = view.findViewById(R.id.tv_selected_category)
 
         val tvAmount = view.findViewById<TextView>(R.id.tv_amount_display)
         val tvCategory = view.findViewById<TextView>(R.id.tv_selected_category)
@@ -70,7 +73,7 @@ class AddExpenseFragment : Fragment() {
         }
 
         // build category grid
-        buildCategoryGrid(view)
+        buildCategoryGrid(view, tvCategory)
 
         // pre-select category if passed from Quick Add
         val preSelectedCategory = arguments?.getString("categoryName") ?: ""
@@ -115,7 +118,7 @@ class AddExpenseFragment : Fragment() {
         }
     }
 
-    private fun buildCategoryGrid(view: View) {
+    private fun buildCategoryGrid(view: View, tvCategory: TextView) {
         val grid = view.findViewById<GridLayout>(R.id.grid_categories)
         grid.removeAllViews()
 
@@ -167,6 +170,37 @@ class AddExpenseFragment : Fragment() {
                     (grid.getChildAt(i) as? CardView)?.setCardBackgroundColor(
                         resources.getColor(R.color.bg_card, null)
                     )
+                }
+                card.setOnClickListener {
+                    if (name == "Other") {
+                        // show dialog to enter custom category name
+                        val input = android.widget.EditText(requireContext()).apply {
+                            hint = "e.g. Salon, Airtime, Gym..."
+                            setPadding(48, 32, 48, 16)
+                            inputType = android.text.InputType.TYPE_CLASS_TEXT
+                        }
+                        android.app.AlertDialog.Builder(requireContext())
+                            .setTitle("What type of expense?")
+                            .setView(input)
+                            .setPositiveButton("OK") { _, _ ->
+                                val customName = input.text.toString().trim().ifEmpty { "Other" }
+                                viewModel.selectCategory(8, customName, "✏️")
+                                tvCategory.text = customName
+                            }
+                            .setNegativeButton("Cancel", null)
+                            .show()
+                    } else {
+                        viewModel.selectCategory(id, name, emoji)
+                        // highlight selected
+                        for (i in 0 until grid.childCount) {
+                            (grid.getChildAt(i) as? CardView)?.setCardBackgroundColor(
+                                resources.getColor(R.color.bg_card, null)
+                            )
+                        }
+                        card.setCardBackgroundColor(
+                            resources.getColor(R.color.bg_deep, null)
+                        )
+                    }
                 }
                 card.setCardBackgroundColor(
                     resources.getColor(R.color.bg_deep, null)
