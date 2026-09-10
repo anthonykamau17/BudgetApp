@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background layers -->
+    <color name="bg_base">#0A0A0F</color>
+    <color name="bg_card">#14141C</color>
+    <color name="bg_deep">#E0E4EF</color>
+
+    <!-- Text hierarchy -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BDD6</color>
+    <color name="text_tertiary">#4A5A6A</color>
+
+    <!-- Orange accents -->
+    <color name="orange_bright">#F59E0B</color>
+    <color name="orange_dim">#FAC775</color>
+
+    <!-- Blue accent -->
+    <color name="blue_accent">#378ADD</color>
+
+    <!-- Status colors -->
+    <color name="red_soft">#F87171</color>
+    <color name="green_soft">#22C55E</color>
+
+    <!-- Borders -->
+    <color name="border_subtle">#D0D8E8</color>
+    <color name="border_strong">#2A2A40</color>
+
+    <!-- Nav bar -->
+    <color name="nav_background">#0A0A0F</color>
+</resources>

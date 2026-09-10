@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_base"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -29,7 +30,7 @@
             android:textColor="@color/text_tertiary"
             android:textSize="12sp"
             android:letterSpacing="0.05"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/tv_user_name"

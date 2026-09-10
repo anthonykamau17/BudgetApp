@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anthonykamau.budgetapp.R
 import com.anthonykamau.budgetapp.util.CurrencyUtils
 import com.anthonykamau.budgetapp.util.DateUtils
+import android.animation.ValueAnimator
 
 class DashboardFragment : Fragment() {
 
@@ -58,8 +59,8 @@ class DashboardFragment : Fragment() {
         // observe remaining balance
         viewModel.remaining.observe(viewLifecycleOwner) { remaining ->
             val currency = viewModel.settings.value?.currency ?: "KES"
-            view.findViewById<TextView>(R.id.tv_remaining).text =
-                CurrencyUtils.formatAmount(remaining, currency)
+            val tvRemaining = view.findViewById<TextView>(R.id.tv_remaining)
+            animateBalance(tvRemaining, remaining, currency)
         }
 
         // observe total spent
@@ -140,6 +141,16 @@ class DashboardFragment : Fragment() {
             tvSpendAmount.text = CurrencyUtils.formatAmount(spent, currency)
             tvSpendSub.text = "of ${CurrencyUtils.formatAmount(budget, currency)} budget"
         }
+    }
+    private fun animateBalance(textView: TextView, targetAmount: Double, currency: String) {
+        val animator = ValueAnimator.ofFloat(0f, targetAmount.toFloat())
+        animator.duration = 1200 // 1.2 seconds
+        animator.interpolator = android.view.animation.DecelerateInterpolator()
+        animator.addUpdateListener { animation ->
+            val animatedValue = animation.animatedValue as Float
+            textView.text = CurrencyUtils.formatAmount(animatedValue.toDouble(), currency)
+        }
+        animator.start()
     }
 
     // returns greeting based on time of day

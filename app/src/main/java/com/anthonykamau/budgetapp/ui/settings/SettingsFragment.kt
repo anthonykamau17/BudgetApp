@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.anthonykamau.budgetapp.R
@@ -16,6 +17,11 @@ import com.anthonykamau.budgetapp.R
 class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by viewModels()
+
+    // theme button references kept at class level so updateThemeButtons can access them
+    private var btnThemeLight: TextView? = null
+    private var btnThemeDark: TextView? = null
+    private var btnThemeSystem: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +34,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // theme buttons
+        btnThemeLight = view.findViewById(R.id.btn_theme_light)
+        btnThemeDark = view.findViewById(R.id.btn_theme_dark)
+        btnThemeSystem = view.findViewById(R.id.btn_theme_system)
+
         val etName = view.findViewById<EditText>(R.id.et_user_name)
         val etBudget = view.findViewById<EditText>(R.id.et_monthly_budget)
         val etCurrency = view.findViewById<EditText>(R.id.et_currency)
@@ -36,6 +47,23 @@ class SettingsFragment : Fragment() {
         val btnSave = view.findViewById<TextView>(R.id.btn_save_settings)
         val btnReset = view.findViewById<TextView>(R.id.btn_reset_month)
         val btnClear = view.findViewById<TextView>(R.id.btn_clear_all)
+
+        // load saved theme and highlight active button
+        val savedTheme = requireActivity()
+            .getSharedPreferences("budget_prefs", android.content.Context.MODE_PRIVATE)
+            .getString("theme", "system") ?: "system"
+        updateThemeButtons(savedTheme)
+
+        // theme click listeners
+        btnThemeLight?.setOnClickListener {
+            applyTheme(AppCompatDelegate.MODE_NIGHT_NO, "light")
+        }
+        btnThemeDark?.setOnClickListener {
+            applyTheme(AppCompatDelegate.MODE_NIGHT_YES, "dark")
+        }
+        btnThemeSystem?.setOnClickListener {
+            applyTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, "system")
+        }
 
         // load existing settings into fields
         viewModel.settings.observe(viewLifecycleOwner) { settings ->
@@ -86,7 +114,6 @@ class SettingsFragment : Fragment() {
         }
 
         // reset month button
-        // reset month button
         btnReset.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Reset this month?")
@@ -99,7 +126,7 @@ class SettingsFragment : Fragment() {
                 .show()
         }
 
-// clear all data button
+        // clear all data button
         btnClear.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Clear all data?")
@@ -118,6 +145,31 @@ class SettingsFragment : Fragment() {
                 .setNegativeButton("Cancel", null)
                 .show()
         }
+    }
 
+    // ── class-level functions — outside onViewCreated ──────────────
+
+    private fun applyTheme(mode: Int, prefValue: String) {
+        AppCompatDelegate.setDefaultNightMode(mode)
+        requireActivity()
+            .getSharedPreferences("budget_prefs", android.content.Context.MODE_PRIVATE)
+            .edit().putString("theme", prefValue).apply()
+        updateThemeButtons(prefValue)
+    }
+
+    private fun updateThemeButtons(active: String) {
+        val activeColor = resources.getColor(R.color.orange_bright, null)
+        val inactiveColor = resources.getColor(R.color.bg_deep, null)
+        val activeText = resources.getColor(R.color.bg_base, null)
+        val inactiveText = resources.getColor(R.color.text_secondary, null)
+
+        btnThemeLight?.setBackgroundColor(if (active == "light") activeColor else inactiveColor)
+        btnThemeLight?.setTextColor(if (active == "light") activeText else inactiveText)
+
+        btnThemeDark?.setBackgroundColor(if (active == "dark") activeColor else inactiveColor)
+        btnThemeDark?.setTextColor(if (active == "dark") activeText else inactiveText)
+
+        btnThemeSystem?.setBackgroundColor(if (active == "system") activeColor else inactiveColor)
+        btnThemeSystem?.setTextColor(if (active == "system") activeText else inactiveText)
     }
 }

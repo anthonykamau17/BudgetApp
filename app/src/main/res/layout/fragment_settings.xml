@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_base"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp"/>
 
         <!-- SECTION: Budget Setup -->
@@ -258,6 +259,97 @@
                     android:checked="true"
                     android:thumbTint="@color/orange_bright"
                     android:trackTint="@color/bg_deep"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- SECTION: Appearance -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APPEARANCE"
+            android:textColor="@color/orange_bright"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="@color/bg_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="App theme"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Three theme buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/btn_theme_light"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="☀️ Light"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/rounded_card_bg"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/btn_theme_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🌙 Dark"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/rounded_card_bg"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/btn_theme_system"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="📱 System"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:background="@drawable/rounded_card_bg"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

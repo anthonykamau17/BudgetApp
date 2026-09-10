@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.Theme.BudgetApp" parent="Theme.Material3.Dark">
+    <style name="Base.Theme.BudgetApp" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/orange_bright</item>
         <item name="colorPrimaryVariant">@color/orange_dim</item>
         <item name="colorOnPrimary">@color/bg_base</item>

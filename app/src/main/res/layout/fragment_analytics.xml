@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_base"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"/>
 
         <!-- Period tabs -->
