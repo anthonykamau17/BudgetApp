@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anthonykamau.budgetapp.R
 import com.anthonykamau.budgetapp.util.CurrencyUtils
 import com.anthonykamau.budgetapp.util.DateUtils
+import com.anthonykamau.budgetapp.util.SurvivalCalculator
 import android.animation.ValueAnimator
 
 class DashboardFragment : Fragment() {
@@ -53,7 +54,6 @@ class DashboardFragment : Fragment() {
                 val tvBudgetTotal = view.findViewById<TextView>(R.id.tv_budget_total)
                 tvBudgetTotal.text = "Budget: ${CurrencyUtils.formatAmount(settings.monthlyBudget, settings.currency)}"
             }
-
         }
 
         // observe remaining balance
@@ -65,7 +65,6 @@ class DashboardFragment : Fragment() {
 
         // observe total spent
         viewModel.totalSpent.observe(viewLifecycleOwner) { spent ->
-            val currency = viewModel.settings.value?.currency ?: "KES"
             view.findViewById<TextView>(R.id.tv_spent).text =
                 CurrencyUtils.formatAmountShort(spent)
         }
@@ -80,8 +79,9 @@ class DashboardFragment : Fragment() {
         view.findViewById<TextView>(R.id.tv_days_left).text =
             viewModel.daysLeftInMonth.toString()
 
-        // observe daily budget left
-        viewModel.dailyBudgetLeft.observe(viewLifecycleOwner) { daily ->
+        // observe daily budget left (mapped to "Daily left" card)
+        viewModel.remaining.observe(viewLifecycleOwner) { rem ->
+            val daily = if (viewModel.daysLeftInMonth > 0) (rem ?: 0.0) / viewModel.daysLeftInMonth else 0.0
             view.findViewById<TextView>(R.id.tv_daily_left).text =
                 CurrencyUtils.formatAmountShort(daily)
         }
@@ -92,6 +92,20 @@ class DashboardFragment : Fragment() {
             view.findViewById<ProgressBar>(R.id.progress_budget).progress = progress
             view.findViewById<TextView>(R.id.tv_percent_remaining).text =
                 "${(100 - progress)}% remaining"
+        }
+
+        // observe survival forecast
+        val tvForecastEmoji = view.findViewById<TextView>(R.id.tv_forecast_emoji)
+        val tvForecastMsg = view.findViewById<TextView>(R.id.tv_forecast_message)
+        
+        viewModel.survivalForecast.observe(viewLifecycleOwner) { forecast ->
+            tvForecastMsg.text = forecast.message
+            tvForecastEmoji.text = when(forecast.status) {
+                SurvivalCalculator.SurvivalStatus.SAFE -> "✅"
+                SurvivalCalculator.SurvivalStatus.WARNING -> "⚠️"
+                SurvivalCalculator.SurvivalStatus.CRITICAL -> "🚨"
+                SurvivalCalculator.SurvivalStatus.BROKE -> "💀"
+            }
         }
 
         // observe funny message
@@ -106,7 +120,30 @@ class DashboardFragment : Fragment() {
             emptyView.visibility = if (expenses.isEmpty()) View.VISIBLE else View.GONE
         }
 
-        // quick add buttons — all navigate to Add Expense
+        // category budget display
+        val categoryBudgetAdapter = CategoryBudgetAdapter { }
+        val rvCategoryBudgets = view.findViewById<RecyclerView>(R.id.rv_category_budgets)
+        rvCategoryBudgets.layoutManager = LinearLayoutManager(requireContext())
+        rvCategoryBudgets.adapter = categoryBudgetAdapter
+
+        viewModel.categoryBudgets.observe(viewLifecycleOwner) { budgets ->
+            viewModel.allMonthExpenses.observe(viewLifecycleOwner) { expenses ->
+                val display = budgets.map { budget ->
+                    val spent = expenses
+                        .filter { it.categoryName == budget.categoryName }
+                        .sumOf { it.amount }
+                    CategoryBudgetDisplay(
+                        categoryName = budget.categoryName,
+                        emoji = budget.emoji,
+                        budgetLimit = budget.budgetLimit,
+                        amountSpent = spent
+                    )
+                }
+                categoryBudgetAdapter.submitList(display)
+            }
+        }
+
+        // quick add buttons
         view.findViewById<LinearLayout>(R.id.btn_quick_food).setOnClickListener {
             val bundle = android.os.Bundle().apply { putString("categoryName", "Food") }
             findNavController().navigate(R.id.addExpenseFragment, bundle)
@@ -124,27 +161,20 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.addExpenseFragment, bundle)
         }
 
-        // see all → navigate to history
+        // AI coach button
+        view.findViewById<androidx.cardview.widget.CardView>(R.id.btn_ai_coach).setOnClickListener {
+            findNavController().navigate(R.id.aiCoachFragment)
+        }
+
+        // see all
         view.findViewById<TextView>(R.id.tv_see_all).setOnClickListener {
             findNavController().navigate(R.id.historyFragment)
         }
-        // circular progress
-        val circularProgress = view.findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.circular_progress)
-        val tvSpendAmount = view.findViewById<TextView>(R.id.tv_spend_amount)
-        val tvSpendSub = view.findViewById<TextView>(R.id.tv_spend_sub)
-
-        viewModel.totalSpent.observe(viewLifecycleOwner) { spent ->
-            val currency = viewModel.settings.value?.currency ?: "KES"
-            val budget = viewModel.settings.value?.monthlyBudget ?: 0.0
-            val pct = if (budget > 0) ((spent / budget) * 100).toInt().coerceIn(0, 100) else 0
-            circularProgress.progress = pct
-            tvSpendAmount.text = CurrencyUtils.formatAmount(spent, currency)
-            tvSpendSub.text = "of ${CurrencyUtils.formatAmount(budget, currency)} budget"
-        }
     }
+
     private fun animateBalance(textView: TextView, targetAmount: Double, currency: String) {
         val animator = ValueAnimator.ofFloat(0f, targetAmount.toFloat())
-        animator.duration = 1200 // 1.2 seconds
+        animator.duration = 1000
         animator.interpolator = android.view.animation.DecelerateInterpolator()
         animator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
@@ -153,7 +183,6 @@ class DashboardFragment : Fragment() {
         animator.start()
     }
 
-    // returns greeting based on time of day
     private fun getGreeting(): String {
         val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
         return when {
@@ -161,16 +190,5 @@ class DashboardFragment : Fragment() {
             hour < 17 -> "Good afternoon,"
             else      -> "Good evening,"
         }
-    }
-    private fun showBudgetSetupPrompt() {
-        android.app.AlertDialog.Builder(requireContext())
-            .setTitle("Welcome to BudgetApp! 👋")
-            .setMessage("Let's set up your monthly budget so we can start tracking your money.")
-            .setPositiveButton("Set up now") { _, _ ->
-                findNavController().navigate(R.id.settingsFragment)
-            }
-            .setNegativeButton("Later", null)
-            .setCancelable(false)
-            .show()
     }
 }

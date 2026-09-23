@@ -50,6 +50,15 @@
         app:popExitAnim="@anim/slide_out_right"/>
 
     <fragment
+        android:id="@+id/aiCoachFragment"
+        android:name="com.anthonykamau.budgetapp.ui.aicoach.AiCoachFragment"
+        android:label="Money Coach"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <fragment
         android:id="@+id/addExpenseFragment"
         android:name="com.anthonykamau.budgetapp.ui.addexpense.AddExpenseFragment"
         android:label="Add Expense"

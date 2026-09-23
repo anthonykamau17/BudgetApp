@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_message_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="6dp">
+
+    <!-- AI avatar — only visible for AI messages -->
+    <TextView
+        android:id="@+id/tv_avatar"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:text="🤖"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/rounded_card_bg"
+        android:elevation="1dp"
+        android:visibility="gone"/>
+
+    <!-- Message bubble -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.2"
+            android:maxWidth="270dp"
+            android:textColor="@color/text_primary"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

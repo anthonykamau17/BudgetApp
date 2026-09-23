@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_base"
+    android:fitsSystemWindows="true">
+
+    <!-- Background dot pattern — sits behind everything -->
+    <com.anthonykamau.budgetapp.util.PatternBackgroundView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- All your existing ScrollView content goes here unchanged -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@android:color/transparent">
+    </ScrollView>
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -234,3 +255,4 @@
 
     </LinearLayout>
 </ScrollView>
+</FrameLayout>

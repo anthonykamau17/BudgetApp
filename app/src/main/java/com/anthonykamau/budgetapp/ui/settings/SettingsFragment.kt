@@ -18,7 +18,6 @@ class SettingsFragment : Fragment() {
 
     private val viewModel: SettingsViewModel by viewModels()
 
-    // theme button references kept at class level so updateThemeButtons can access them
     private var btnThemeLight: TextView? = null
     private var btnThemeDark: TextView? = null
     private var btnThemeSystem: TextView? = null
@@ -38,6 +37,27 @@ class SettingsFragment : Fragment() {
         btnThemeLight = view.findViewById(R.id.btn_theme_light)
         btnThemeDark = view.findViewById(R.id.btn_theme_dark)
         btnThemeSystem = view.findViewById(R.id.btn_theme_system)
+
+        // load existing category budgets
+        val etFood = view.findViewById<EditText>(R.id.et_budget_food)
+        val etTransport = view.findViewById<EditText>(R.id.et_budget_transport)
+        val etBooks = view.findViewById<EditText>(R.id.et_budget_books)
+        val etCoffee = view.findViewById<EditText>(R.id.et_budget_coffee)
+        val etRent = view.findViewById<EditText>(R.id.et_budget_rent)
+        val etFun = view.findViewById<EditText>(R.id.et_budget_fun)
+
+        viewModel.getCategoryBudgets().observe(viewLifecycleOwner) { budgets ->
+            budgets.forEach { budget ->
+                when (budget.categoryName) {
+                    "Food" -> etFood.setText(budget.budgetLimit.toInt().toString())
+                    "Transport" -> etTransport.setText(budget.budgetLimit.toInt().toString())
+                    "Books" -> etBooks.setText(budget.budgetLimit.toInt().toString())
+                    "Coffee" -> etCoffee.setText(budget.budgetLimit.toInt().toString())
+                    "Rent" -> etRent.setText(budget.budgetLimit.toInt().toString())
+                    "Fun" -> etFun.setText(budget.budgetLimit.toInt().toString())
+                }
+            }
+        }
 
         val etName = view.findViewById<EditText>(R.id.et_user_name)
         val etBudget = view.findViewById<EditText>(R.id.et_monthly_budget)
@@ -97,6 +117,7 @@ class SettingsFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            // Save main settings
             viewModel.saveSettings(
                 userName = name,
                 monthlyBudget = budget,
@@ -104,12 +125,23 @@ class SettingsFragment : Fragment() {
                 notifyAt80 = switch80.isChecked,
                 notifyAt100 = switch100.isChecked
             )
+
+            // Save individual category budgets to the DB properly!
+            val categoryBudgetsMap = mapOf(
+                "Food" to Pair(etFood.text.toString().toDoubleOrNull() ?: 0.0, "🍔"),
+                "Transport" to Pair(etTransport.text.toString().toDoubleOrNull() ?: 0.0, "🚌"),
+                "Books" to Pair(etBooks.text.toString().toDoubleOrNull() ?: 0.0, "📚"),
+                "Coffee" to Pair(etCoffee.text.toString().toDoubleOrNull() ?: 0.0, "☕"),
+                "Rent" to Pair(etRent.text.toString().toDoubleOrNull() ?: 0.0, "🏠"),
+                "Fun" to Pair(etFun.text.toString().toDoubleOrNull() ?: 0.0, "🎮")
+            )
+            viewModel.saveCategoryBudgets(categoryBudgetsMap)
         }
 
         // observe save result
         viewModel.saveResult.observe(viewLifecycleOwner) { success ->
             if (success) {
-                Toast.makeText(requireContext(), "Settings saved! ✅", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Settings & Category Limits saved! ✅", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -146,8 +178,6 @@ class SettingsFragment : Fragment() {
                 .show()
         }
     }
-
-    // ── class-level functions — outside onViewCreated ──────────────
 
     private fun applyTheme(mode: Int, prefValue: String) {
         AppCompatDelegate.setDefaultNightMode(mode)

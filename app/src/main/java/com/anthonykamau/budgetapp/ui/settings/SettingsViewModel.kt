@@ -65,4 +65,23 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             repository.deleteAllExpenses()
         }
     }
+
+    fun saveCategoryBudgets(budgets: Map<String, Pair<Double, String>>) {
+        viewModelScope.launch {
+            budgets.forEach { (name, pair) ->
+                val (amount, emoji) = pair
+                if (amount > 0) {
+                    database.categoryBudgetDao().insertOrUpdate(
+                        com.anthonykamau.budgetapp.data.entity.CategoryBudget(
+                            categoryName = name,
+                            budgetLimit = amount,
+                            emoji = emoji
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    fun getCategoryBudgets() = database.categoryBudgetDao().getAllCategoryBudgets()
 }

@@ -13,6 +13,7 @@ import com.anthonykamau.budgetapp.R
 import com.anthonykamau.budgetapp.data.entity.Expense
 import com.anthonykamau.budgetapp.util.CurrencyUtils
 import com.anthonykamau.budgetapp.util.DateUtils
+import com.anthonykamau.budgetapp.util.PatternBackgroundView
 
 class AnalyticsFragment : Fragment() {
 
@@ -30,18 +31,19 @@ class AnalyticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // set pattern type for this screen
+        val patternView = view.findViewById<PatternBackgroundView>(R.id.pattern_bg)
+        patternView?.patternType = "circles"
+
         val tabWeek = view.findViewById<TextView>(R.id.tab_week)
         val tabMonth = view.findViewById<TextView>(R.id.tab_month)
         val tabSemester = view.findViewById<TextView>(R.id.tab_semester)
 
         // tab click listeners
-
-        // force initial load for week tab
-        viewModel.weekExpenses.observe(viewLifecycleOwner) { expenses ->
-            if (currentTab == "week") {
-                updateStats(view, expenses)
-                updateTabStyles(view, "week")
-            }
+        tabWeek.setOnClickListener {
+            currentTab = "week"
+            updateTabStyles(view, "week")
+            viewModel.weekExpenses.value?.let { updateStats(view, it) }
         }
 
         tabMonth.setOnClickListener {
@@ -56,9 +58,12 @@ class AnalyticsFragment : Fragment() {
             viewModel.semesterExpenses.value?.let { updateStats(view, it) }
         }
 
-        // observe week expenses (default tab)
+        // observe expenses for each tab
         viewModel.weekExpenses.observe(viewLifecycleOwner) { expenses ->
-            if (currentTab == "week") updateStats(view, expenses)
+            if (currentTab == "week") {
+                updateStats(view, expenses)
+                updateTabStyles(view, "week")
+            }
         }
 
         viewModel.monthExpenses.observe(viewLifecycleOwner) { expenses ->
@@ -92,7 +97,6 @@ class AnalyticsFragment : Fragment() {
         tvCount.text = count.toString()
         tvAvg.text = CurrencyUtils.formatAmountShort(avg)
 
-        // insight message
         tvInsight.text = if (expenses.isEmpty()) {
             "No expenses recorded yet. Start tracking!"
         } else {
@@ -102,7 +106,6 @@ class AnalyticsFragment : Fragment() {
                     "You've made $count transactions totalling ${CurrencyUtils.formatAmountShort(total)}."
         }
 
-        // empty state
         tvEmpty.visibility = if (expenses.isEmpty()) View.VISIBLE else View.GONE
         llBreakdown.visibility = if (expenses.isEmpty()) View.GONE else View.VISIBLE
     }
@@ -142,13 +145,11 @@ class AnalyticsFragment : Fragment() {
             val percentage = if (grandTotal > 0) ((total / grandTotal) * 100).toInt() else 0
             val isTop = categoryTotals.first().first == name
 
-            // row container
             val row = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(0, 0, 0, 12)
             }
 
-            // name + amount row
             val topRow = LinearLayout(requireContext()).apply {
                 orientation = LinearLayout.HORIZONTAL
                 layoutParams = LinearLayout.LayoutParams(
@@ -176,7 +177,6 @@ class AnalyticsFragment : Fragment() {
             topRow.addView(tvName)
             topRow.addView(tvAmount)
 
-            // progress bar
             val progressBar = ProgressBar(
                 requireContext(), null,
                 android.R.attr.progressBarStyleHorizontal

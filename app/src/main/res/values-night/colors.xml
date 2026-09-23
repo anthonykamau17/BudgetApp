@@ -3,12 +3,12 @@
     <!-- Background layers -->
     <color name="bg_base">#0A0A0F</color>
     <color name="bg_card">#14141C</color>
-    <color name="bg_deep">#E0E4EF</color>
+    <color name="bg_deep">#1E1E2E</color>
 
     <!-- Text hierarchy -->
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#B0BDD6</color>
-    <color name="text_tertiary">#4A5A6A</color>
+    <color name="text_tertiary">#6A7A8A</color>
 
     <!-- Orange accents -->
     <color name="orange_bright">#F59E0B</color>
@@ -22,8 +22,8 @@
     <color name="green_soft">#22C55E</color>
 
     <!-- Borders -->
-    <color name="border_subtle">#D0D8E8</color>
-    <color name="border_strong">#2A2A40</color>
+    <color name="border_subtle">#222232</color>
+    <color name="border_strong">#3A3A50</color>
 
     <!-- Nav bar -->
     <color name="nav_background">#0A0A0F</color>

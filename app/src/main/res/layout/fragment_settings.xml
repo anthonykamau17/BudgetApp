@@ -1,449 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_base"
-    android:fitsSystemWindows="true"
-    android:fillViewport="true">
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <com.anthonykamau.budgetapp.util.PatternBackgroundView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"/>
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textColor="@color/text_primary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- SECTION: Budget Setup -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BUDGET SETUP"
-            android:textColor="@color/orange_bright"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Your name -->
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="@color/text_primary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- SECTION: Budget Setup -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAIN PROFILE"
+                android:textColor="@color/orange_bright"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Your name"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="11sp"/>
-
-                <EditText
-                    android:id="@+id/et_user_name"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="e.g. Brian"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_tertiary"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:background="@null"
-                    android:inputType="textPersonName"
-                    android:layout_marginTop="4dp"/>
+                    android:orientation="vertical"
+                    android:padding="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your name" android:textColor="@color/text_secondary" android:textSize="11sp"/>
+                    <EditText android:id="@+id/et_user_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="e.g. Brian" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:textSize="15sp" android:textStyle="bold" android:background="@null" android:inputType="textPersonName" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Monthly budget -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Monthly budget (KES)"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="11sp"/>
-
-                <EditText
-                    android:id="@+id/et_monthly_budget"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="e.g. 7800"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_tertiary"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:background="@null"
-                    android:inputType="numberDecimal"
-                    android:layout_marginTop="4dp"/>
+                    android:orientation="vertical"
+                    android:padding="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Monthly Budget" android:textColor="@color/text_secondary" android:textSize="11sp"/>
+                    <EditText android:id="@+id/et_monthly_budget" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:textSize="18sp" android:textStyle="bold" android:background="@null" android:inputType="numberDecimal" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Currency -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Currency"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="11sp"/>
-
-                <EditText
-                    android:id="@+id/et_currency"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="e.g. KES"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_tertiary"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Currency Symbol" android:textColor="@color/text_secondary" android:textSize="11sp"/>
+                    <EditText android:id="@+id/et_currency" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="KES" android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary" android:textSize="15sp" android:textStyle="bold" android:background="@null" android:inputType="text" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- SECTION: Notifications -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOTIFICATIONS"
+                android:textColor="@color/orange_bright"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="14dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Notify at 80% usage" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <Switch android:id="@+id/switch_notify_80" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="14dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Notify at 100% usage" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <Switch android:id="@+id/switch_notify_100" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- SECTION: Category Budgets -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CATEGORY LIMITS"
+                android:textColor="@color/orange_bright"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🍔 Food" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_food" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🚌 Transport" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_transport" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="📚 Books" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_books" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="☕ Coffee" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_coffee" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🏠 Rent" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_rent" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" app:cardBackgroundColor="@color/bg_card" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🎮 Fun" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <EditText android:id="@+id/et_budget_fun" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="0" android:inputType="numberDecimal" android:textColor="@color/orange_bright" android:textSize="14sp" android:gravity="center" android:background="@drawable/bg_input_field" android:padding="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- SECTION: Theme -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="APPEARANCE"
+                android:textColor="@color/orange_bright"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="24dp">
+                <TextView android:id="@+id/btn_theme_light" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Light" android:gravity="center" android:padding="12dp" android:background="@drawable/rounded_card_bg" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                <TextView android:id="@+id/btn_theme_dark" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dark" android:gravity="center" android:padding="12dp" android:background="@drawable/rounded_card_bg" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                <TextView android:id="@+id/btn_theme_system" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="System" android:gravity="center" android:padding="12dp" android:background="@drawable/rounded_card_bg" android:clickable="true" android:focusable="true"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/orange_bright"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="4dp">
+                <TextView
+                    android:id="@+id/btn_save_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SAVE SETTINGS"
+                    android:textColor="@color/bg_base"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:background="@null"
-                    android:inputType="text"
-                    android:layout_marginTop="4dp"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- SECTION: Notifications -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NOTIFICATIONS"
-            android:textColor="@color/orange_bright"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Notify at 80% -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"/>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="14dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Warn at 80% budget"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Get notified when you're close"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="11sp"
-                        android:layout_marginTop="2dp"/>
-
-                </LinearLayout>
-
-                <Switch
-                    android:id="@+id/switch_notify_80"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:thumbTint="@color/orange_bright"
-                    android:trackTint="@color/bg_deep"/>
-
+                android:layout_marginBottom="20dp">
+                <TextView android:id="@+id/btn_reset_month" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Reset Month" android:textColor="@color/orange_dim" android:textSize="12sp" android:gravity="center" android:padding="10dp"/>
+                <TextView android:id="@+id/btn_clear_all" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Clear Data" android:textColor="@color/red_soft" android:textSize="12sp" android:gravity="center" android:padding="10dp"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <!-- Notify at 100% -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="14dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alert at 100% budget"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Get notified when budget is exceeded"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="11sp"
-                        android:layout_marginTop="2dp"/>
-
-                </LinearLayout>
-
-                <Switch
-                    android:id="@+id/switch_notify_100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:thumbTint="@color/orange_bright"
-                    android:trackTint="@color/bg_deep"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- SECTION: Appearance -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="APPEARANCE"
-            android:textColor="@color/orange_bright"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="App theme"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- Three theme buttons -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/btn_theme_light"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="☀️ Light"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/rounded_card_bg"
-                        android:clickable="true"
-                        android:focusable="true"/>
-
-                    <TextView
-                        android:id="@+id/btn_theme_dark"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="🌙 Dark"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/rounded_card_bg"
-                        android:clickable="true"
-                        android:focusable="true"/>
-
-                    <TextView
-                        android:id="@+id/btn_theme_system"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="📱 System"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:background="@drawable/rounded_card_bg"
-                        android:clickable="true"
-                        android:focusable="true"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- SECTION: Data -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DATA"
-            android:textColor="@color/orange_bright"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Reset month -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/btn_reset_month"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Reset this month's expenses"
-                android:textColor="@color/orange_dim"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:padding="14dp"
-                android:clickable="true"
-                android:focusable="true"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Clear all data -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/btn_clear_all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Clear all data"
-                android:textColor="@color/red_soft"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:padding="14dp"
-                android:clickable="true"
-                android:focusable="true"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Save button -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/orange_bright"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:id="@+id/btn_save_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save settings"
-                android:textColor="@color/bg_base"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:padding="14dp"
-                android:clickable="true"
-                android:focusable="true"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Version -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BudgetApp v1.0"
-            android:textColor="@color/text_tertiary"
-            android:textSize="11sp"
-            android:gravity="center"
-            android:layout_marginTop="8dp"/>
-
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

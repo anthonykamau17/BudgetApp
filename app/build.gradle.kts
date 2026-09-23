@@ -42,6 +42,11 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.work.runtime)
 
+    // Retrofit + OkHttp for AI API calls
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

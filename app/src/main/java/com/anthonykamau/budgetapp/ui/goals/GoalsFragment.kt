@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anthonykamau.budgetapp.R
 import com.anthonykamau.budgetapp.data.entity.SavingsGoal
 import com.anthonykamau.budgetapp.util.CurrencyUtils
+import com.anthonykamau.budgetapp.util.PatternBackgroundView
 
 class GoalsFragment : Fragment() {
 
@@ -37,6 +38,8 @@ class GoalsFragment : Fragment() {
         val tvEmpty = view.findViewById<TextView>(R.id.tv_empty_goals)
         val tvTotalSaved = view.findViewById<TextView>(R.id.tv_total_saved)
         val btnAddGoal = view.findViewById<View>(R.id.btn_add_goal)
+        val patternView = view.findViewById<PatternBackgroundView>(R.id.pattern_bg)
+        patternView?.patternType = "lines"
 
         // set up adapter
         adapter = GoalAdapter(
