@@ -23,7 +23,7 @@ The latest version transforms BudgetApp from a simple tracker into a proactive f
 
 ---
 
-## 📱 Core Screens
+## Core Screens
 
 | Screen | Key Features |
 |--------|-------------|
