@@ -1,80 +1,84 @@
-#  BudgetApp
+# 💰 BudgetApp v3.0
 
-A student budget tracking Android app built for Kenyan university students.
-Track expenses, set savings goals, and get brutally honest (and funny) financial insights.
+A modern, "brutally honest" budget tracking Android application designed specifically for the Kenyan university student lifestyle. 
+
+BudgetApp doesn't just track your KES; it coaches you, predicts your financial survival, and gives you the hard truth when you're spending like a billionaire on a comrade's budget.
 
 ![Platform](https://img.shields.io/badge/Platform-Android-green)
 ![Language](https://img.shields.io/badge/Language-Kotlin-orange)
-![Min SDK](https://img.shields.io/badge/Min%20SDK-26-blue)
+![Design](https://img.shields.io/badge/Design-Material%203-blue)
+![Database](https://img.shields.io/badge/Database-Room-lightgrey)
 
 ---
 
-## 📱 Screens
+## 🚀 New in v3.0: The "Financial Sensei" Update
 
-| Screen | Description |
+The latest version transforms BudgetApp from a simple tracker into a proactive financial companion:
+
+*   **🏯 Money Sensei (AI Coach)**: Consult your personal sensei for data-driven intelligence on your spending habits.
+*   **⌛ Survival Forecast**: A predictive engine that calculates your wallet's "life expectancy" based on your current burn rate.
+*   **🎨 Dynamic Themes**: Full support for Light, Dark, and System modes with a beautiful custom-patterned UI.
+*   **📊 Category Guardrails**: Set specific monthly limits for Food, Transport, Fun, and more to stop overspending before it happens.
+*   **✨ Animated Interface**: Smooth balance counters and interactive progress indicators for a premium feel.
+
+---
+
+## 📱 Core Screens
+
+| Screen | Key Features |
 |--------|-------------|
-| 🏠 Dashboard | Live balance, progress bar, quick add, funny message |
-| ➕ Add Expense | Custom keypad, 8 categories, under 3 seconds |
-| 📋 History | Full expense list, search, filter, delete |
-| 📊 Analytics | Bar chart, category breakdown, week/month/semester |
-| 🎯 Goals | Savings goals with progress tracking |
-| ⚙️ Settings | Budget setup, notifications, data management |
+| **🏠 Dashboard** | Live animated balance, Survival Forecast card, Funny Sensei messages, and Category Limit progress. |
+| **➕ Quick Add** | Ultra-fast logging for "Comrade Essentials" (Food, Fare, Books, Coffee) directly from Home. |
+| **🏯 AI Coach** | Deep-dive conversation with the Money Sensei to fix your broken finances. |
+| **📋 History** | Full searchable transaction log with quick-delete and category filtering. |
+| **📊 Analytics** | Visual spending breakdown by category and time (Week, Month, Semester). |
+| **⚙️ Settings** | Profile management, granular category budget limits, and theme selection. |
 
 ---
 
-##  Features
+## 🛠️ Tech Stack & Architecture
 
-- **Real-time dashboard** — remaining budget updates instantly when you log an expense
-- **Quick Add** — tap Food, Fare, Books or Coffee from the home screen, pre-selected
-- **Funny messages** — brutally honest spending insights in Kenyan student language
-- **Money prediction** — tells you how many days your money will last at current spend rate
-- **Budget warnings** — notifications at 80% and 100% spend
-- **Savings goals** — track progress toward multiple goals simultaneously
-- **Analytics** — see spending by day and by category across Week, Month or Semester
-- **Onboarding** — 4-slide tutorial for first-time users
-- **Splash screen** — branded launch screen
+BudgetApp follows modern Android development best practices and the **Clean Architecture** principles.
 
----
-
-##  Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Language | Kotlin |
-| UI | XML Layouts + Material Design 3 |
-| Architecture | MVVM + Repository Pattern |
-| Database | Room (SQLite) |
-| Async | Kotlin Coroutines + LiveData |
-| Navigation | Jetpack Navigation Component |
-| Background | WorkManager |
-| Build | Gradle with Version Catalog |
+*   **Language**: Kotlin 2.0+
+*   **UI Engine**: XML Layouts + Material Design 3 (M3) Components.
+*   **Asynchronous Logic**: Kotlin Coroutines & Flow for non-blocking database operations.
+*   **Data Persistence**: Room Database (SQLite) with multi-version migrations.
+*   **Networking**: Retrofit & OkHttp (for AI Coach intelligence).
+*   **Background Tasks**: WorkManager for budget threshold notifications.
+*   **Navigation**: Jetpack Navigation Component with safe-args.
+*   **Architecture**: MVVM (Model-View-ViewModel) with Repository Pattern.
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Project Organization
+
+```text
 com.anthonykamau.budgetapp/
 ├── data/
-│ ├── dao/ # Room DAOs
-│ ├── db/ # AppDatabase
-│ ├── entity/ # Room entities
-│ └── repository/ # Repository layer
+│   ├── dao/          # Room Access Objects
+│   ├── db/           # Database Configuration & Migrations
+│   ├── entity/       # Data Models (Expense, Category, ChatMessage)
+│   └── repository/   # Data source abstraction layer
 ├── ui/
-│ ├── dashboard/ # Home screen
-│ ├── addexpense/ # Add expense screen
-│ ├── history/ # Transaction history
-│ ├── analytics/ # Charts & insights
-│ ├── goals/ # Savings goals
-│ └── settings/ # App configuration
-└── util/ # Helper classes
+│   ├── dashboard/    # Home & Summary logic
+│   ├── aicoach/      # AI Intelligence & Chat UI
+│   ├── analytics/    # Data visualization
+│   ├── addexpense/   # Transaction input
+│   └── settings/     # Configuration & Themes
+└── util/             # Helpers (Calculators, Formatters, Custom Views)
+```
 
-## 👨‍💻 Author
+---
 
-**Anthony Kamau**
-BBIT Third year student — Strathmore University
+## 👨‍💻 Developer
+
+**Anthony Kamau**  
+*BBIT Third Year — Strathmore University*  
 Mobile Application Development Project
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the MIT License.
+This project is open-source under the **MIT License**. Feel free to fork and improve!
