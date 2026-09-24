@@ -64,7 +64,7 @@ abstract class AppDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "CREATE TABLE IF NOT EXISTS `chat_messages` " +
-                            "(`id` INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL, " +
+                            "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                             "`content` TEXT NOT NULL, " +
                             "`isUser` INTEGER NOT NULL, " +
                             "`timestamp` INTEGER NOT NULL)"
@@ -81,26 +81,24 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
-                    .addCallback(DatabaseCallback())
+                    .addCallback(object : RoomDatabase.Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            // Use a fresh scope to seed data after the database is built
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val database = getDatabase(context)
+                                seedCategories(database.categoryDao())
+                                seedDefaultSettings(database.budgetSettingsDao())
+                            }
+                        }
+                    })
                     .build()
                 INSTANCE = instance
                 instance
             }
         }
-    }
 
-    private class DatabaseCallback : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            INSTANCE?.let { database ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    seedCategories(database.categoryDao())
-                    seedDefaultSettings(database.budgetSettingsDao())
-                }
-            }
-        }
-
-        suspend fun seedCategories(categoryDao: CategoryDao) {
+        private suspend fun seedCategories(categoryDao: CategoryDao) {
             val defaultCategories = listOf(
                 Category(name = "Food", emoji = "🍔"),
                 Category(name = "Transport", emoji = "🚌"),
@@ -113,7 +111,7 @@ abstract class AppDatabase : RoomDatabase() {
             categoryDao.insertAll(defaultCategories)
         }
 
-        suspend fun seedDefaultSettings(budgetSettingsDao: BudgetSettingsDao) {
+        private suspend fun seedDefaultSettings(budgetSettingsDao: BudgetSettingsDao) {
             val defaultSettings = BudgetSettings(
                 id = 1,
                 userName = "",

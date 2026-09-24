@@ -24,7 +24,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val recentExpenses = expenseRepository.getRecentExpenses()
     val totalSaved = savingsGoalRepository.getTotalSaved()
     val categoryBudgets = database.categoryBudgetDao().getAllCategoryBudgets()
-    val allMonthExpenses = expenseRepository.getExpensesFromDate(startOfMonth) // RESTORED
+    val allMonthExpenses = expenseRepository.getExpensesFromDate(startOfMonth)
 
     val daysLeftInMonth = DateUtils.getDaysLeftInMonth()
     val daysElapsed = DateUtils.getDaysElapsedInMonth()
@@ -32,7 +32,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val remaining = MediatorLiveData<Double>().apply {
         addSource(totalSpent) { spent ->
             val budget = settings.value?.monthlyBudget ?: 0.0
-            value = BudgetCalculator.calculateRemaining(budget, spent)
+            value = BudgetCalculator.calculateRemaining(budget, spent ?: 0.0)
         }
         addSource(settings) { s ->
             val budget = s?.monthlyBudget ?: 0.0
@@ -44,6 +44,11 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val percentageUsed = MediatorLiveData<Double>().apply {
         addSource(totalSpent) { spent ->
             val budget = settings.value?.monthlyBudget ?: 0.0
+            value = BudgetCalculator.calculatePercentageUsed(budget, spent ?: 0.0)
+        }
+        addSource(settings) { s ->
+            val budget = s?.monthlyBudget ?: 0.0
+            val spent = totalSpent.value ?: 0.0
             value = BudgetCalculator.calculatePercentageUsed(budget, spent)
         }
     }
@@ -52,7 +57,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val survivalForecast = MediatorLiveData<SurvivalCalculator.Forecast>().apply {
         addSource(totalSpent) { spent ->
             val rem = remaining.value ?: 0.0
-            val avg = BudgetCalculator.calculateAverageDailySpend(spent, daysElapsed)
+            val avg = BudgetCalculator.calculateAverageDailySpend(spent ?: 0.0, daysElapsed)
             value = SurvivalCalculator.calculateForecast(rem, avg)
         }
         addSource(remaining) { rem ->
@@ -64,7 +69,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
 
     val funnyMessage = MediatorLiveData<String>().apply {
         addSource(percentageUsed) { pct ->
-            value = FunnyMessageGenerator.getMessage(BudgetCalculator.getBudgetStatus(pct))
+            value = FunnyMessageGenerator.getMessage(BudgetCalculator.getBudgetStatus(pct ?: 0.0))
         }
     }
 
