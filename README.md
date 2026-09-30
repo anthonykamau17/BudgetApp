@@ -1,4 +1,4 @@
-# 💰 BudgetApp v3.0
+#  BudgetApp v3.0
 
 A modern, "brutally honest" budget tracking Android application designed specifically for the Kenyan university student lifestyle. 
 
@@ -11,32 +11,32 @@ BudgetApp doesn't just track your KES; it coaches you, predicts your financial s
 
 ---
 
-## 🚀 New in v3.0: The "Financial Sensei" Update
+## New in v3.0: The "Financial Sensei" Update
 
 The latest version transforms BudgetApp from a simple tracker into a proactive financial companion:
 
-*   **🏯 Money Sensei (AI Coach)**: Consult your personal sensei for data-driven intelligence on your spending habits.
-*   **⌛ Survival Forecast**: A predictive engine that calculates your wallet's "life expectancy" based on your current burn rate.
-*   **🎨 Dynamic Themes**: Full support for Light, Dark, and System modes with a beautiful custom-patterned UI.
-*   **📊 Category Guardrails**: Set specific monthly limits for Food, Transport, Fun, and more to stop overspending before it happens.
-*   **✨ Animated Interface**: Smooth balance counters and interactive progress indicators for a premium feel.
+*   ** Money Sensei (AI Coach)**: Consult your personal sensei for data-driven intelligence on your spending habits.
+*   ** Survival Forecast**: A predictive engine that calculates your wallet's "life expectancy" based on your current burn rate.
+*   ** Dynamic Themes**: Full support for Light, Dark, and System modes with a beautiful custom-patterned UI.
+*   ** Category Guardrails**: Set specific monthly limits for Food, Transport, Fun, and more to stop overspending before it happens.
+*   ** Animated Interface**: Smooth balance counters and interactive progress indicators for a premium feel.
 
 ---
 
-## 📱 Core Screens
+## Core Screens
 
 | Screen | Key Features |
 |--------|-------------|
-| **🏠 Dashboard** | Live animated balance, Survival Forecast card, Funny Sensei messages, and Category Limit progress. |
-| **➕ Quick Add** | Ultra-fast logging for "Comrade Essentials" (Food, Fare, Books, Coffee) directly from Home. |
-| **🏯 AI Coach** | Deep-dive conversation with the Money Sensei to fix your broken finances. |
-| **📋 History** | Full searchable transaction log with quick-delete and category filtering. |
-| **📊 Analytics** | Visual spending breakdown by category and time (Week, Month, Semester). |
-| **⚙️ Settings** | Profile management, granular category budget limits, and theme selection. |
+| ** Dashboard** | Live animated balance, Survival Forecast card, Funny Sensei messages, and Category Limit progress. |
+| ** Quick Add** | Ultra-fast logging for "Comrade Essentials" (Food, Fare, Books, Coffee) directly from Home. |
+| ** AI Coach** | Deep-dive conversation with the Money Sensei to fix your broken finances. |
+| ** History** | Full searchable transaction log with quick-delete and category filtering. |
+| ** Analytics** | Visual spending breakdown by category and time (Week, Month, Semester). |
+| ** Settings** | Profile management, granular category budget limits, and theme selection. |
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack & Architecture
 
 BudgetApp follows modern Android development best practices and the **Clean Architecture** principles.
 
@@ -51,7 +51,7 @@ BudgetApp follows modern Android development best practices and the **Clean Arch
 
 ---
 
-## 🏗️ Project Organization
+##  Project Organization
 
 ```text
 com.anthonykamau.budgetapp/
@@ -71,7 +71,7 @@ com.anthonykamau.budgetapp/
 
 ---
 
-## 👨‍💻 Developer
+##  Developer
 
 **Anthony Kamau**  
 *BBIT Third Year — Strathmore University*  
