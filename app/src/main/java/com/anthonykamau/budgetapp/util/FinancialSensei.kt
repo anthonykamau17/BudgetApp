@@ -72,6 +72,27 @@ object FinancialSensei {
             }
         }
 
+        // 4. DYNAMIC INVESTING & SAVINGS ADVICE (V3.0 Smart Engine Addition)
+        val dailyBurnPercentage = if (monthlyBudget > 0) (totalSpent / monthlyBudget) * 100 else 0.0
+        
+        when {
+            // Surplus Zone: Low burn rate or plenty of funds left
+            dailyBurnPercentage < 60 && remaining > 5000 -> {
+                insights.add("🎯 SENSEI'S SAVINGS ADVICE: You have a healthy surplus! Don't leave extra cash idle in M-Pesa where a single 'sherehe' plan can wipe it out. Lock at least KES 1,500 into your custom Savings Goal immediately!")
+                insights.add("📈 SENSEI'S INVESTING TIP: Since your burn rate is low, you are ready for a Money Market Fund (MMF). Look into platforms like CIC, Sanlam, or Britam. They accept entries as low as KES 100/500 and earn you daily compound interest instead of flat bank fees.")
+            }
+            // Mid-Tier Stable Zone: Moderate budget remaining
+            dailyBurnPercentage >= 60 && remaining > 1500 -> {
+                insights.add("🎯 SENSEI'S SAVINGS ADVICE: Implement the 10% rule. Every time an allowance, pocket money, or soft cash lands, save 10% *first* before opening this tracker to log your daily food or fare.")
+                insights.add("📈 SENSEI'S INVESTING TIP: Focus on micro-investing. Rather than high-risk trading, look at fractional government bonds or treasury bills via custom banking apps, where small leftovers work for you securely.")
+            }
+            // Deficit / Emergency Warning Zone: Out of cash or near broke
+            else -> {
+                insights.add("🎯 SENSEI'S SAVINGS ADVICE: Stop thinking about long-term investing right now! Your immediate goal is building an Emergency Fund equivalent to 1 month of baseline campus survival expenses to completely avoid bad debts or emergency loans.")
+                insights.add("📈 SENSEI'S INVESTING TIP: Your ultimate investment right now is defensive budgeting. Cut all silent micro-drains (like random automated subscriptions, extra luxury soda cycles, or delivery apps) to safeguard your remaining coins.")
+            }
+        }
+
         return insights
     }
 }
