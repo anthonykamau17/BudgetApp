@@ -71,6 +71,9 @@ com.anthonykamau.budgetapp/
 
 ---
 
+##Video Demo
+Watch the app walkthrough on Youtube -(https://www.youtube.com/shorts/VyPFuCwRetw)
+
 ##  Developer
 
 **Anthony Kamau**  
